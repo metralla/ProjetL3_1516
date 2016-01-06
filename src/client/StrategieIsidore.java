@@ -53,14 +53,17 @@ public class StrategieIsidore extends StrategiePersonnage{
 		public void executeStrategie(HashMap<Integer, Point> voisins) throws RemoteException {
 			// arene
 			IArene arene = console.getArene();
+			HashMap<Caracteristique,Integer> cv;
 			
 			// reference RMI de l'element courant
 			int refRMI = 0;
+			int initmstr=0;
 			
 			// position de l'element courant
 			Point position = null;
 			
 			try {
+				
 				refRMI = console.getRefRMI();
 				position = arene.getPosition(refRMI);
 			} catch (RemoteException e) {
@@ -109,6 +112,16 @@ public class StrategieIsidore extends StrategiePersonnage{
 						}
 					}
 					if(arene.estMonstreFromRef(refCible)){
+						if (initmstr==0){
+							//TODO Clairvoyance
+						}
+						else if (initmstr<console.getPersonnage().getCaract(Caracteristique.INITIATIVE)){
+							arene.deplace(refRMI, refCible);
+							arene.lanceAttaque(refRMI, refCible);
+						}
+						else{
+							
+						}
 						
 					}
 					else{
