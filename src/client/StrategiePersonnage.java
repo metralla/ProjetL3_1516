@@ -36,12 +36,13 @@ public class StrategiePersonnage {
 	 * @param nbTours nombre de tours pour ce personnage (si negatif, illimite)
 	 * @param position position initiale du personnage dans l'arene
 	 * @param logger gestionnaire de log
+	 * !!!!!!!!!!!!!!!!!!!
 	 */
 	public StrategiePersonnage(String ipArene, int port, String ipConsole, 
 			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
 			int nbTours, Point position, LoggerProjet logger) {
 		
-		logger.info("Lanceur", "Creation de la console...");
+		/*logger.info("Lanceur", "Creation de la console...");
 		
 		try {
 			console = new Console(ipArene, port, ipConsole, this, 
@@ -52,7 +53,7 @@ public class StrategiePersonnage {
 		} catch (Exception e) {
 			logger.info("Personnage", "Erreur lors de la creation de la console : \n" + e.toString());
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
