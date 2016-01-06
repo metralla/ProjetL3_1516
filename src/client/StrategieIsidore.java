@@ -73,7 +73,7 @@ public class StrategieIsidore extends StrategiePersonnage{
 			
 			if (voisins.isEmpty()) { 
 				if((console.getPersonnage().getCaract(Caracteristique.VIE)<100)){
-					
+				arene.lanceAutoSoin(refRMI);
 				}
 				else{
 				console.setPhrase("J'erre...");
@@ -132,7 +132,7 @@ public class StrategieIsidore extends StrategiePersonnage{
 					}
 					else{
 						if (checked==0){
-							//TODO Clairvoyance
+							cv=arene.lanceClairvoyance(refRMI, refCible);
 						}
 						//else{
 							//if((console.getPersonnage().getCaract(Caracteristique.INITIATIVE)> linit calculée)&&(viedelacv-console.getPersonnage().getCaract(Caracteristique.FORCE)*defdelacv/100<=0)){
