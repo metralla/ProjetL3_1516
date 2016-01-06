@@ -85,10 +85,12 @@ public class StrategieIsidore extends StrategiePersonnage{
 				if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 					// j'interagis directement
 					if(arene.estPotionFromRef(refCible)){ // potion
-						// ramassage
-						console.setPhrase("Je ramasse une potion");
-
-						arene.ramassePotion(refRMI, refCible);			
+						int effpoponear= arene.caractFromRef(refCible, Caracteristique.VIE)+arene.caractFromRef(refCible, Caracteristique.FORCE)+arene.caractFromRef(refCible, Caracteristique.INITIATIVE)+arene.caractFromRef(refCible, Caracteristique.DEFENSE);
+						if((effpoponear>0)&&((console.getPersonnage().getCaract(Caracteristique.VIE)-arene.caractFromRef(refCible,Caracteristique.VIE))>30)){
+						console.setPhrase("Je ramasse une potion sympathique");
+						arene.ramassePotion(refRMI, refCible);		
+						}
+								
 					} else { // personnage
 						// duel
 						console.setPhrase("Je fais un duel avec " + elemPlusProche);
@@ -100,6 +102,11 @@ public class StrategieIsidore extends StrategiePersonnage{
 					
 					if(arene.estPotionFromRef(refCible)){
 						
+						int effpopo= arene.caractFromRef(refCible, Caracteristique.VIE)+arene.caractFromRef(refCible, Caracteristique.FORCE)+arene.caractFromRef(refCible, Caracteristique.INITIATIVE)+arene.caractFromRef(refCible, Caracteristique.DEFENSE);
+						if((effpopo>0)&&((console.getPersonnage().getCaract(Caracteristique.VIE)-arene.caractFromRef(refCible,Caracteristique.VIE))>30)){
+							console.setPhrase("Je vais vers cette gouleyante potion " + elemPlusProche);
+							arene.deplace(refRMI, refCible);	
+						}
 					}
 					if(arene.estMonstreFromRef(refCible)){
 						
