@@ -68,11 +68,11 @@ public class LanceIvrogne {
 			// caracteristiques du personnage
 			HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
 			// seule la force n'a pas sa valeur par defaut (exemple)
-			int temp = (int)Math.random() * 100;
+			int temp = (int)(Math.random() * 100.);
 			caracts.put(Caracteristique.FORCE, temp);
-			temp = (int)Math.random() * 100;
+			temp = (int)(Math.random() * 100.);
 			caracts.put(Caracteristique.VIE, temp);
-			temp = (int)Math.random() * 100;
+			temp = (int)(Math.random() * 100.);
 			caracts.put(Caracteristique.INITIATIVE, temp);
 			
 			Point position = Calculs.positionAleatoireArene();
