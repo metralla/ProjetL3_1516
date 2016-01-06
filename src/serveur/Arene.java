@@ -25,6 +25,7 @@ import serveur.element.Element;
 import serveur.element.Monstre;
 import serveur.element.Personnage;
 import serveur.element.Potion;
+import serveur.element.Isidore;
 import serveur.interaction.Clairvoyance;
 import serveur.element.PotionTP;
 import serveur.interaction.Deplacement;

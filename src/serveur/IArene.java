@@ -10,6 +10,7 @@ import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Personnage;
 import serveur.element.Potion;
+import serveur.element.Isidore;
 import serveur.vuelement.VueElement;
 
 /**
