@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import serveur.Arene;
 import serveur.element.Caracteristique;
 import serveur.vuelement.VuePersonnage;
-import serveur.vuelement.VuePotion;
+
 import utilitaires.Constantes;
 
 public class Soin extends Interaction<VuePersonnage> {

@@ -124,7 +124,8 @@ public class AreneJPanel extends JPanel {
 			g.setFont(of);				
 		}
 		
-		Image image;
+		/*	
+	  	Image image;
 		try {
 			image = ImageIO.read(new File("images/map.png"));	
 			// Affichage map de fon, en fonction de la taille de la fenetre
@@ -134,7 +135,7 @@ public class AreneJPanel extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		*/
 		// dessiner les elements
 		for(VuePotion vuePotion : potions) {
 			dessineElement(g, vuePotion);

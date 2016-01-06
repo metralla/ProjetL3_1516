@@ -116,4 +116,3 @@ public class StrategieBarde extends StrategiePersonnage {
 	}
 
 }
-
