@@ -9,7 +9,7 @@ import logger.LoggerProjet;
 import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
-import serveur.element.Guerrier;
+
 import serveur.element.Paladin;
 import serveur.element.Potion;
 import utilitaires.Calculs;
