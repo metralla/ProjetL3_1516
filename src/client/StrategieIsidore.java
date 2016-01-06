@@ -54,6 +54,7 @@ public class StrategieIsidore extends StrategiePersonnage{
 			// arene
 			IArene arene = console.getArene();
 			HashMap<Caracteristique,Integer> cv;
+			int checked=0;
 			
 			// reference RMI de l'element courant
 			int refRMI = 0;
@@ -97,8 +98,12 @@ public class StrategieIsidore extends StrategiePersonnage{
 					} else { // personnage
 						// duel
 						console.setPhrase("Je fais un duel avec " + elemPlusProche);
+						if(arene.estMonstreFromRef(refRMI)){
+							initmstr=0;
+						}
 						arene.lanceAttaque(refRMI, refCible);
 						arene.deplace(refRMI, refCible);
+						
 					}
 					
 				} else { 
@@ -120,11 +125,25 @@ public class StrategieIsidore extends StrategiePersonnage{
 							arene.lanceAttaque(refRMI, refCible);
 						}
 						else{
-							
+							arene.deplace(refRMI,0);
+							arene.lanceAttaque(refRMI, 0);
 						}
 						
 					}
 					else{
+						if (checked==0){
+							//TODO Clairvoyance
+						}
+						//else{
+							//if((console.getPersonnage().getCaract(Caracteristique.INITIATIVE)> linit calculée)&&(viedelacv-console.getPersonnage().getCaract(Caracteristique.FORCE)*defdelacv/100<=0)){
+							//arene.deplace(refRMI, refCible);
+							//arene.lanceAttaque(refRMI, refCible);
+							//}
+						//else{
+						//arene.deplace(refRMI, 0);
+							//arene.lanceAttaque(refRMI, 0);	
+						//}
+						//}
 						
 					}
 					// si voisins, mais plus eloignes
