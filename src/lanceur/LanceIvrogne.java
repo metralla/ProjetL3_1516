@@ -6,7 +6,6 @@ import java.net.InetAddress;
 import java.util.HashMap;
 
 import client.StrategieIvrogne;
-import client.StrategiePersonnage;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
 import utilitaires.Calculs;
