@@ -64,8 +64,8 @@ public class FenetreNouvellePotion extends JFrame {
 		this.setTitle("Création Potion");
 		// Option fermeture
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		// Taille de base !!!!!!!!!!!!!! A REVOIR
-	    this.setSize(700, 500);
+		// Taille de base 
+		this.setSize(500, 300);
 	    // Fenetre toujours au premier plan
 	    this.setAlwaysOnTop(true);
 	    // Taille non modifiable
@@ -92,7 +92,7 @@ public class FenetreNouvellePotion extends JFrame {
 		centrerListe.setHorizontalAlignment(JLabel.CENTER);
 		listeType.setCellRenderer(centrerListe);
 		
-		labelInformationType.setText("Un villageois ramasse toutes les potions et se combat dès qu'il trouve un personnage.");
+		labelInformationType.setText("+10 force");
 		labelInformationType.setHorizontalAlignment(JLabel.CENTER);
 		labelInformationType.setFont(new Font(labelInformationType.getFont().getName(),Font.ITALIC, labelInformationType.getFont().getSize()));
 		
@@ -107,36 +107,36 @@ public class FenetreNouvellePotion extends JFrame {
 							switch(listeType.getSelectedValue())
 							{
 								case "BonusForce":
-									labelInformationType.setText("Une Potion de......");
+									labelInformationType.setText("+10 force");
 									break;
 								case "BonusIni":
-									labelInformationType.setText("Une Potion de ........");
+									labelInformationType.setText("+10 initiative");
 								break;
 								case "EtoileDeBowser":
-									labelInformationType.setText("Une Potion de......");
+									labelInformationType.setText("-20 force,-20 vie,-20 initiative");
 									break;
 								case "EtoileDeMario":
-									labelInformationType.setText("Une Potion de ......");
+									labelInformationType.setText("+20 force,+20 vie,+20 initiative");
 									break;
 								case "MalusForce":
-									labelInformationType.setText("Une Potion de......");
+									labelInformationType.setText("-10 force");
 									break;
 								case "MalusIni":
-									labelInformationType.setText("Une Potion de......");
+									labelInformationType.setText("-10 initiative");
 									break;
 								case "PotDegats":
-									labelInformationType.setText("Une Potion de......");
+									labelInformationType.setText("-10 Vie");
 									break;
 								case "PotHeal":
-									labelInformationType.setText("Une Potion de.......");
+									labelInformationType.setText("+10 Vie");
 									break;
 								case "Potion":
-									labelInformationType.setText("Une Potion de.......");
+									labelInformationType.setText("Une Potion aléatoire :)");
 									break;
+							}
+						}
 					}
 				}
-			}
-		}
 		);
 		
 		GridBagConstraints gbc_label_type = new GridBagConstraints();

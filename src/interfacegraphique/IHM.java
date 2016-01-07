@@ -8,8 +8,6 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.rmi.Naming;
@@ -192,25 +190,6 @@ public class IHM extends JFrame implements Runnable {
 		 */
 		fenetrePersonnage = new FenetreNouveauPersonnage(this);
 		fenetrePotion = new FenetreNouvellePotion(this);
-
-		// ajout d'un listener de clic sur l'arene permettant l'envoi de personnage et de potion dynamiquement
-		arenePanel.addMouseListener
-		(
-			new MouseAdapter() 
-			{
-				public void mouseClicked(MouseEvent e) 
-				{
-					if (fenetrePersonnage != null && fenetrePersonnage.isVisible()) 
-					{
-						// affichage 
-					}
-					else if (fenetrePotion != null && fenetrePotion.isVisible())
-					{
-						// 
-					}
-				}
-			}
-		);
 	}
 
 	/**
