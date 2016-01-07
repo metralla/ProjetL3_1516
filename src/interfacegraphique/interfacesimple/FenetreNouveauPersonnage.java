@@ -78,9 +78,7 @@ public class FenetreNouveauPersonnage extends JFrame {
 		JLabel labelType = new JLabel("Type du Personnage");
 		labelType.setHorizontalAlignment(JLabel.CENTER);
 		
-		String[] ar = {"Assassin","Barde","Berserker",
-				"Guerrier","Ivrogne","MageTemps",
-				"Paladin","Voleur"};
+		String[] ar = {"Assassin","Barde","Berserker","Guerrier","Ivrogne","Paladin","Voleur","MageTemps"};
 		
 		listeType = new JList<String>(ar);
 		listeType.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -92,7 +90,6 @@ public class FenetreNouveauPersonnage extends JFrame {
 		centrerListe.setHorizontalAlignment(JLabel.CENTER);
 		listeType.setCellRenderer(centrerListe);
 		
-		labelInformationType.setText("Un villageois ramasse toutes les potions et se combat dès qu'il trouve un personnage.");
 		labelInformationType.setHorizontalAlignment(JLabel.CENTER);
 		labelInformationType.setFont(new Font(labelInformationType.getFont().getName(),Font.ITALIC, labelInformationType.getFont().getSize()));
 		
@@ -121,14 +118,16 @@ public class FenetreNouveauPersonnage extends JFrame {
 								case "Ivrogne":
 									labelInformationType.setText("Un Ivrogne ......");
 									break;
-								case "MageTemps":
-									labelInformationType.setText("Un  MageTemps......");
-									break;
 								case "Paladin":
 									labelInformationType.setText("Un Paladin ......");
 									break;
 								case "Voleur":
 									labelInformationType.setText("Un Voleur .......");
+									break;
+								case "MageTemps":
+									labelInformationType.setText("Un mage Temp .....");
+									break;
+								default:
 									break;
 					}
 				}

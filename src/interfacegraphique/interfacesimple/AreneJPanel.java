@@ -196,7 +196,7 @@ public class AreneJPanel extends JPanel {
 									break;
 				case "Ivrogne" :	iconePath = "images/Ivrogne.png";
 									break;
-				case "Mage Temps" :	iconePath = "images/Chronomage.png";
+				case "MageTemps" :	iconePath = "images/Chronomage.png";
 									break;
 				case "Paladin" :	iconePath = "images/Pretre.png";
 									break;
