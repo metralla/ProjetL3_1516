@@ -24,8 +24,6 @@ public class StrategiePersonnage {
 	 */
 	protected Console console;
 	private int checked = 0;
-	private int bloque = 0;
-	
 	protected StrategiePersonnage(LoggerProjet logger){
 		logger.info("Lanceur", "Creation de la console...");
 	}
@@ -58,8 +56,6 @@ public class StrategiePersonnage {
 		}
 	}
 
-	// TODO etablir une strategie afin d'evoluer dans l'arene de combat
-	// une proposition de strategie (simple) est donnee ci-dessous
 	/** 
 	 * Decrit la strategie.
 	 * Les methodes pour evoluer dans le jeu doivent etre les methodes RMI
@@ -70,8 +66,6 @@ public class StrategiePersonnage {
 	public void executeStrategie(HashMap<Integer, Point> voisins) throws RemoteException {
 		// arene
 		IArene arene = console.getArene();
-		HashMap<Caracteristique,Integer> cv =new HashMap<Caracteristique, Integer>();
-		
 		// reference RMI de l'element courant
 		int refRMI = 0;
 		int offset = Calculs.getOffset();
@@ -152,7 +146,6 @@ public class StrategiePersonnage {
 				    }
 				} else {
 					if (checked==0){
-						cv=arene.lanceClairvoyance(refRMI, refCible);
 						checked=1;
 					}
 					else{
@@ -167,9 +160,9 @@ public class StrategiePersonnage {
 							break;
 							case 3: console.setPhrase("Mais elle est ou ma caisse :(");
 							break;
-							case 4: console.setPhrase("Aux champs hips...lysé");
+							case 4: console.setPhrase("Aux champs hips...lysï¿½");
 							break;
-							case 5: console.setPhrase("J'ai mal à la tête");
+							case 5: console.setPhrase("J'ai mal ï¿½ la tï¿½te");
 							break;
 							case 6: console.setPhrase("Say my name !");
 							break;
@@ -184,7 +177,6 @@ public class StrategiePersonnage {
 							}
 							
 							arene.lanceAutoSoin(refRMI);
-							bloque++;
 						} else if (distPlusProche < 4){		
 							console.setPhrase("Je vais vers mon voisin " + elemPlusProche);
 							arene.deplace(refRMI, refCible);
