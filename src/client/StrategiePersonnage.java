@@ -134,7 +134,7 @@ public class StrategiePersonnage {
 				} else if(arene.estMonstreFromRef(refCible)){	
 					
 					if (distPlusProche<=4){
-						arene.lanceAttaque(refRMI, refCible);
+						arene.lanceAutoSoin(refRMI);
 					} else { 
 						arene.deplace(refRMI, refCible);
 						arene.lanceAttaque(refRMI, refCible);
@@ -146,7 +146,7 @@ public class StrategiePersonnage {
 					}
 					else{
 						if (distPlusProche <= 4){
-							arene.lanceAttaque(refRMI, refCible);
+							arene.lanceAutoSoin(refRMI);
 						} else{		
 							console.setPhrase("Je vais vers mon voisin " + elemPlusProche);
 							arene.deplace(refRMI, refCible);
