@@ -26,15 +26,15 @@ public class Voler extends Interaction<VuePersonnage> {
 
 				// caracteristiques de la cible
 				HashMap<Caracteristique, Integer> valeursCible = defenseur.getElement().getCaracts();
-				if(valeursCible.get(Caracteristique.FORCE) >= 15) {
+				if(valeursCible.get(Caracteristique.FORCE) >= 15) 
+				{
 					arene.incrementeCaractElement(defenseur, Caracteristique.FORCE, -15);
 					arene.incrementeCaractElement(attaquant, Caracteristique.FORCE, 15);
+					logs(Level.INFO, "Vol effectue !");
 				}
 				else {
 					logs(Level.INFO, "Impossible de voler !");
 				}
-				
-				logs(Level.INFO, "Vol effectue");
 				
 			} else {
 				logs(Level.INFO, Constantes.nomRaccourciClient(attaquant) + " ou " + 
