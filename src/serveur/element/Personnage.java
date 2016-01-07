@@ -15,7 +15,7 @@ import utilitaires.Calculs;
 public class Personnage extends Element {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Cree un personnage avec un nom et un groupe.
 	 * @param nom du personnage
