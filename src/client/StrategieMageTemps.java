@@ -10,7 +10,7 @@ import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
 
-import serveur.element.MageTemps;
+import serveur.element.Personnage;
 import serveur.element.Potion;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
@@ -43,7 +43,7 @@ public class StrategieMageTemps extends StrategiePersonnage {
 		
 		try {
 			console = new Console(ipArene, port, ipConsole, this, 
-					new MageTemps(nom, groupe, caracts), 
+					new Personnage(nom, groupe, caracts), 
 					nbTours, position, logger);
 			logger.info("Lanceur", "Creation de la console reussie");
 			

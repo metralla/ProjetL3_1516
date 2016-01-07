@@ -10,7 +10,7 @@ import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Potion;
-import serveur.element.Voleur;
+import serveur.element.Personnage;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
@@ -42,7 +42,7 @@ public class StrategieVoleur extends StrategiePersonnage {
 		
 		try {
 			console = new Console(ipArene, port, ipConsole, this, 
-					new Voleur(nom, groupe, caracts), 
+					new Personnage(nom, groupe, caracts), 
 					nbTours, position, logger);
 			logger.info("Lanceur", "Creation de la console reussie");
 			

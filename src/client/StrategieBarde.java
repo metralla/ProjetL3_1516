@@ -9,7 +9,7 @@ import logger.LoggerProjet;
 import serveur.IArene;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
-import serveur.element.Guerrier;
+import serveur.element.Personnage;
 import serveur.element.Potion;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
@@ -40,7 +40,7 @@ public class StrategieBarde extends StrategiePersonnage {
 		
 		try {
 			console = new Console(ipArene, port, ipConsole, this, 
-					new Guerrier(nom, groupe, caracts), 
+					new Personnage(nom, groupe, caracts), 
 					nbTours, position, logger);
 			logger.info("Lanceur", "Creation de la console reussie");
 			

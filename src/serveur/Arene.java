@@ -17,7 +17,6 @@ import java.util.logging.Level;
 
 import client.controle.IConsole;
 import logger.LoggerProjet;
-import serveur.element.Berserker;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Personnage;

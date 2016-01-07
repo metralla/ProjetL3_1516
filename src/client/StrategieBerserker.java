@@ -7,7 +7,7 @@ import java.util.HashMap;
 import client.controle.Console;
 import logger.LoggerProjet;
 import serveur.IArene;
-import serveur.element.Berserker;
+import serveur.element.Personnage;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
 
@@ -41,7 +41,7 @@ public class StrategieBerserker extends StrategiePersonnage {
 		
 		try {
 			console = new Console(ipArene, port, ipConsole, this, 
-					new Berserker(nom, groupe, caracts), 
+					new Personnage(nom, groupe, caracts), 
 					nbTours, position, logger);
 			logger.info("Lanceur", "Creation de la console reussie");
 			
