@@ -23,6 +23,7 @@ public class StrategiePersonnage {
 	 * (l'arene).
 	 */
 	protected Console console;
+	private int checked = 0;
 	
 	protected StrategiePersonnage(LoggerProjet logger){
 		logger.info("Lanceur", "Creation de la console...");
@@ -69,7 +70,6 @@ public class StrategiePersonnage {
 		// arene
 		IArene arene = console.getArene();
 		HashMap<Caracteristique,Integer> cv =new HashMap<Caracteristique, Integer>();
-		int checked=0;
 		
 		// reference RMI de l'element courant
 		int refRMI = 0;
@@ -112,15 +112,15 @@ public class StrategiePersonnage {
 				} else if (arene.estPersonnageFromRef(refCible)){ // personnage
 					// duel
 					console.setPhrase("Je fais un duel avec " + elemPlusProche);
-					arene.lanceAttaque(refRMI, refCible);
 					arene.deplace(refRMI, refCible);
+					arene.lanceAttaque(refRMI, refCible);
 					if(arene.caractFromRef(refCible, Caracteristique.VIE)<=0){
 						checked=0;
 					}
 				} else if(arene.estMonstreFromRef(refCible)){
 					console.setPhrase("Je tape le monstre " + elemPlusProche);
-					arene.lanceAttaque(refRMI, refCible);
 					arene.deplace(refRMI, refCible);
+					arene.lanceAttaque(refRMI, refCible);
 				}
 			} else { 
 				
@@ -133,9 +133,10 @@ public class StrategiePersonnage {
 					}
 				} else if(arene.estMonstreFromRef(refCible)){	
 					
-					if (distPlusProche==4){
+					if (distPlusProche<=4){
 						arene.lanceAttaque(refRMI, refCible);
-					} else { arene.deplace(refRMI, refCible);
+					} else { 
+						arene.deplace(refRMI, refCible);
 						arene.lanceAttaque(refRMI, refCible);
 					}
 				} else {
@@ -144,7 +145,7 @@ public class StrategiePersonnage {
 						checked=1;
 					}
 					else{
-						if (distPlusProche==4){
+						if (distPlusProche <= 4){
 							arene.lanceAttaque(refRMI, refCible);
 						} else{		
 							console.setPhrase("Je vais vers mon voisin " + elemPlusProche);
