@@ -106,10 +106,9 @@ public class StrategiePersonnage {
 				if(arene.estPotionFromRef(refCible)){ // potion
 					int effpoponear= arene.caractFromRef(refCible, Caracteristique.VIE)+arene.caractFromRef(refCible, Caracteristique.FORCE)+arene.caractFromRef(refCible, Caracteristique.INITIATIVE)+arene.caractFromRef(refCible, Caracteristique.DEFENSE);
 					if((effpoponear>0)&&((console.getPersonnage().getCaract(Caracteristique.VIE)-arene.caractFromRef(refCible,Caracteristique.VIE))>30)){
-					console.setPhrase("Je ramasse une potion sympathique");
-					arene.ramassePotion(refRMI, refCible);		
-					}
-							
+						console.setPhrase("Je ramasse une potion sympathique");
+						arene.ramassePotion(refRMI, refCible);		
+					}			
 				} else if (arene.estPersonnageFromRef(refCible)){ // personnage
 					// duel
 					console.setPhrase("Je fais un duel avec " + elemPlusProche);
@@ -118,15 +117,12 @@ public class StrategiePersonnage {
 					if(arene.caractFromRef(refCible, Caracteristique.VIE)<=0){
 						checked=0;
 					}
-					}
-					
-				}
-				else if(arene.estMonstreFromRef(refCible)){
+				} else if(arene.estMonstreFromRef(refCible)){
 					console.setPhrase("Je tape le monstre " + elemPlusProche);
 					arene.lanceAttaque(refRMI, refCible);
 					arene.deplace(refRMI, refCible);
-					} 
-				else { 
+				}
+			} else { 
 				
 				if(arene.estPotionFromRef(refCible)){
 					
@@ -135,21 +131,14 @@ public class StrategiePersonnage {
 						console.setPhrase("Je vais vers cette gouleyante potion " + elemPlusProche);
 						arene.deplace(refRMI, refCible);	
 					}
-				}
-				if(arene.estMonstreFromRef(refCible)){
+				} else if(arene.estMonstreFromRef(refCible)){	
 					
-						
-						if (distPlusProche==4){
-							arene.lanceAttaque(refRMI, refCible);
-						}
-						else { arene.deplace(refRMI, refCible);
+					if (distPlusProche==4){
 						arene.lanceAttaque(refRMI, refCible);
-						}
-					
-					
-				}
-				
-				else{
+					} else { arene.deplace(refRMI, refCible);
+						arene.lanceAttaque(refRMI, refCible);
+					}
+				} else {
 					if (checked==0){
 						cv=arene.lanceClairvoyance(refRMI, refCible);
 						checked=1;
@@ -157,22 +146,17 @@ public class StrategiePersonnage {
 					else{
 						if (distPlusProche==4){
 							arene.lanceAttaque(refRMI, refCible);
-						}
-						else{		
-						arene.deplace(refRMI, 0);
-						arene.lanceAttaque(refRMI, 0);	
+						} else{		
+							console.setPhrase("Je vais vers mon voisin " + elemPlusProche);
+							arene.deplace(refRMI, refCible);
+							arene.lanceAttaque(refRMI, refCible);	
 					    }
 					}
-					
 				}
-				// si voisins, mais plus eloignes
-				// je vais vers le plus proche
-				console.setPhrase("Je vais vers mon voisin " + elemPlusProche);
-				arene.deplace(refRMI, refCible);
-				arene.lanceAttaque(refRMI, refCible);
 			}
 		}
-	}	}
+	}
+}
 
 	
 
