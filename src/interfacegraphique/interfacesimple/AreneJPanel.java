@@ -214,23 +214,23 @@ public class AreneJPanel extends JPanel {
 		{
 			switch (entite.getNom()) 
 			{
-			case "BonusForce" : 	iconePath = "images/Vie.png";
+			case "BonusForce" : 	iconePath = "images/AttaquePlus.png";
 								break;
 			case "BonusIni" :		iconePath = "images/Init.png";
 								break;
-			case "EtoileDeBowser" :	iconePath = "images/Vie.png";
+			case "EtoileDeBowser" :	iconePath = "images/EtoileBowser.png";
 								break;
-			case "EtoileDeMario" :	iconePath = "images/Vie.png";
+			case "EtoileDeMario" :	iconePath = "images/EtoileMario.png";
 								break;
-			case "MalusForce" :		iconePath = "images/Vie.png";
+			case "MalusForce" :		iconePath = "images/AttaqueMoins.png";
 								break;
-			case "MalusIni" :		iconePath = "images/Vie.png";
+			case "MalusIni" :		iconePath = "images/MalusIni.png";
 								break;
-			case "PotDegats" :		iconePath = "images/Vie.png";
+			case "PotDegats" :		iconePath = "images/MalusVie.png";
 								break;
 			case "PotHeal" :		iconePath = "images/Vie.png";
 								break;
-			case "Potion" :			iconePath = "images/Vie.png";
+			case "Potion" :			iconePath = "images/Potion.png";
 			break;
 			}
 			iconeFile = new File(iconePath);
