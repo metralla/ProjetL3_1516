@@ -34,13 +34,13 @@ public class StrategieAssassin extends StrategiePersonnage {
 	 */
 	public StrategieAssassin(String ipArene, int port, String ipConsole, 
 			String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
-			int nbTours, Point position, LoggerProjet logger) {
-		
-		super(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+			int nbTours, Point position, LoggerProjet logger) 
+	{
+		super(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);	
 		
 		try {
 			console = new Console(ipArene, port, ipConsole, this, 
-					new Assassin(nom, groupe, caracts), 
+					new Assassin(nom, groupe, caracts),
 					nbTours, position, logger);
 			logger.info("Lanceur", "Creation de la console reussie");
 			

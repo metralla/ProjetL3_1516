@@ -570,27 +570,53 @@ public class IHM extends JFrame implements Runnable {
 			switch(type)
 			{
 				case "Assassin":
+					caracts.put(Caracteristique.FORCE, 80);
+					caracts.put(Caracteristique.VIE, 20);
+					caracts.put(Caracteristique.INITIATIVE, 80);
 					new StrategieAssassin(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 				break;
 				case "Barde":
+					caracts.put(Caracteristique.FORCE, 20);
+					caracts.put(Caracteristique.VIE, 65);
+					caracts.put(Caracteristique.INITIATIVE, 75);
 					new StrategieBarde(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 					break;
 				case "Berserker":
+					caracts.put(Caracteristique.FORCE, 35);
+					caracts.put(Caracteristique.VIE, 100);
+					caracts.put(Caracteristique.INITIATIVE, 50);
 					new StrategieBerserker(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 				break;
 				case "Guerrier":
+					caracts.put(Caracteristique.FORCE, 80);
+					caracts.put(Caracteristique.VIE, 80);
+					caracts.put(Caracteristique.INITIATIVE, 20);
 					new StrategieGuerrier(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 				break;
 				case "Ivrogne":
+					int temp = (int)(Math.random() * 100.);
+					caracts.put(Caracteristique.FORCE, temp);
+					temp = (int)(Math.random() * 100.);
+					caracts.put(Caracteristique.VIE, temp);
+					temp = (int)(Math.random() * 100.);
+					caracts.put(Caracteristique.INITIATIVE, temp);
 					new StrategieIvrogne(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 				break;
 				case "MageTemps":
+					caracts.put(Caracteristique.FORCE, 40);
+					caracts.put(Caracteristique.VIE, 30);
+					caracts.put(Caracteristique.INITIATIVE, 70);
 					new StrategieMageTemps(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 				break;
 				case "Paladin":
+					caracts.put(Caracteristique.FORCE, 50);
+					caracts.put(Caracteristique.VIE, 50);
 					new StrategiePaladin(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 				break;
 				case "Voleur":
+					caracts.put(Caracteristique.FORCE, 30);
+					caracts.put(Caracteristique.VIE, 30);
+					caracts.put(Caracteristique.INITIATIVE, 100);
 					new StrategieVoleur(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
 				break;
 			}
