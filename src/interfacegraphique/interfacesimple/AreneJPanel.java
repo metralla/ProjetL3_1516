@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Polygon;
+//import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,7 +66,7 @@ public class AreneJPanel extends JPanel {
 	/**
 	 * Couleur du rond entourant les elements selectionnes.
 	 */
-	private static final Color SELECTED_COLOR = new Color(0,0,0,70);
+	//private static final Color SELECTED_COLOR = new Color(0,0,0,70);
 	
 	/**
 	 * Timer permettant l'affichage du compte a rebours.
