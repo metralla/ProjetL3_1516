@@ -73,7 +73,7 @@ public class StrategiePersonnage {
 		
 		// reference RMI de l'element courant
 		int refRMI = 0;
-		int initmstr=0;
+
 		
 		// position de l'element courant
 		Point position = null;
@@ -113,22 +113,20 @@ public class StrategiePersonnage {
 				} else if (arene.estPersonnageFromRef(refCible)){ // personnage
 					// duel
 					console.setPhrase("Je fais un duel avec " + elemPlusProche);
-					if(arene.estMonstreFromRef(refRMI)){
-						initmstr=0;
-					}
 					arene.lanceAttaque(refRMI, refCible);
 					arene.deplace(refRMI, refCible);
 					if(arene.caractFromRef(refCible, Caracteristique.VIE)<=0){
 						checked=0;
 					}
-					else{ //Potion negative qui est apparue directement en face -> d�placement al�atoire
-						arene.lanceAttaque(refRMI, refCible);
-						arene.deplace(refRMI, 0);
 					}
 					
 				}
-				
-			} else { 
+				else if(arene.estMonstreFromRef(refCible)){
+					console.setPhrase("Je tape le monstre " + elemPlusProche);
+					arene.lanceAttaque(refRMI, refCible);
+					arene.deplace(refRMI, refCible);
+					} 
+				else { 
 				
 				if(arene.estPotionFromRef(refCible)){
 					
@@ -139,11 +137,7 @@ public class StrategiePersonnage {
 					}
 				}
 				if(arene.estMonstreFromRef(refCible)){
-					if (initmstr==0){
-						cv=arene.lanceClairvoyance(refRMI, refCible);
-						initmstr= cv.get(Caracteristique.INITIATIVE);
-					}
-					else if (initmstr<console.getPersonnage().getCaract(Caracteristique.INITIATIVE)){
+					
 						
 						if (distPlusProche==4){
 							arene.lanceAttaque(refRMI, refCible);
@@ -151,13 +145,10 @@ public class StrategiePersonnage {
 						else { arene.deplace(refRMI, refCible);
 						arene.lanceAttaque(refRMI, refCible);
 						}
-					}
-					else{
-						arene.deplace(refRMI,0);
-						arene.lanceAttaque(refRMI, 0);
-					}
+					
 					
 				}
+				
 				else{
 					if (checked==0){
 						cv=arene.lanceClairvoyance(refRMI, refCible);
@@ -168,13 +159,6 @@ public class StrategiePersonnage {
 							arene.lanceAttaque(refRMI, refCible);
 						}
 						else{		
-						if((console.getPersonnage().getCaract(Caracteristique.INITIATIVE)> cv.get(Caracteristique.INITIATIVE))&&(cv.get(Caracteristique.VIE)-console.getPersonnage().getCaract(Caracteristique.FORCE)*cv.get(Caracteristique.DEFENSE)/100<=0)){
-						arene.deplace(refRMI, refCible);
-						arene.lanceAttaque(refRMI, refCible);
-						}
-						
-					    else{
-						checked=0;
 						arene.deplace(refRMI, 0);
 						arene.lanceAttaque(refRMI, 0);	
 					    }
@@ -191,4 +175,4 @@ public class StrategiePersonnage {
 	}	}
 
 	
-}
+
