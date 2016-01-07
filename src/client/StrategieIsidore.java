@@ -17,7 +17,7 @@ import serveur.element.Isidore;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 /**
- * @author Théo
+ * @author Theo
  *
  */
 public class StrategieIsidore extends StrategiePersonnage{
@@ -53,7 +53,7 @@ public class StrategieIsidore extends StrategiePersonnage{
 		public void executeStrategie(HashMap<Integer, Point> voisins) throws RemoteException {
 			// arene
 			IArene arene = console.getArene();
-			HashMap<Caracteristique,Integer> cv =new HashMap();
+			HashMap<Caracteristique,Integer> cv =new HashMap<Caracteristique, Integer>();
 			int checked=0;
 			
 			// reference RMI de l'element courant
@@ -95,7 +95,7 @@ public class StrategieIsidore extends StrategiePersonnage{
 						arene.ramassePotion(refRMI, refCible);		
 						}
 								
-					} else { // personnage
+					} else if (arene.estPersonnageFromRef(refCible)){ // personnage
 						// duel
 						console.setPhrase("Je fais un duel avec " + elemPlusProche);
 						if(arene.estMonstreFromRef(refRMI)){
@@ -105,6 +105,10 @@ public class StrategieIsidore extends StrategiePersonnage{
 						arene.deplace(refRMI, refCible);
 						if(arene.caractFromRef(refCible, Caracteristique.VIE)<=0){
 							checked=0;
+						}
+						else{ //Potion negative qui est apparue directement en face -> déplacement aléatoire
+							arene.lanceAttaque(refRMI, refCible);
+							arene.deplace(refRMI, 0);
 						}
 						
 					}
@@ -125,8 +129,13 @@ public class StrategieIsidore extends StrategiePersonnage{
 							initmstr= cv.get(Caracteristique.INITIATIVE);
 						}
 						else if (initmstr<console.getPersonnage().getCaract(Caracteristique.INITIATIVE)){
-							arene.deplace(refRMI, refCible);
+							
+							if (distPlusProche==4){
+								arene.lanceAttaque(refRMI, refCible);
+							}
+							else { arene.deplace(refRMI, refCible);
 							arene.lanceAttaque(refRMI, refCible);
+							}
 						}
 						else{
 							arene.deplace(refRMI,0);
@@ -140,14 +149,20 @@ public class StrategieIsidore extends StrategiePersonnage{
 							checked=1;
 						}
 						else{
+							if (distPlusProche==4){
+								arene.lanceAttaque(refRMI, refCible);
+							}
+							else{		
 							if((console.getPersonnage().getCaract(Caracteristique.INITIATIVE)> cv.get(Caracteristique.INITIATIVE))&&(cv.get(Caracteristique.VIE)-console.getPersonnage().getCaract(Caracteristique.FORCE)*cv.get(Caracteristique.DEFENSE)/100<=0)){
 							arene.deplace(refRMI, refCible);
 							arene.lanceAttaque(refRMI, refCible);
 							}
-						else{
+							
+						    else{
+							checked=0;
 							arene.deplace(refRMI, 0);
 							arene.lanceAttaque(refRMI, 0);	
-						}
+						    }
 						}
 						
 					}
@@ -159,6 +174,7 @@ public class StrategieIsidore extends StrategiePersonnage{
 				}
 			}
 		}
-
+		}
+}
 		
-	}
+	
