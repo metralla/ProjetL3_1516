@@ -46,10 +46,11 @@ public class Duel extends Interaction<VuePersonnage> {
 				logs(Level.INFO, Constantes.nomRaccourciClient(attaquant) + " colle une beigne ("
 						+ perteVie + " points de degats) a " + Constantes.nomRaccourciClient(defenseur));
 			}
-			
-			if(defenseur.getClass().getName() == "Berserker") {
+	
+			if(defenseur.getElement().getNom().compareTo("Berserker") == 0) {
 				int gainFo = 100 - defenseur.getElement().getCaract(Caracteristique.VIE);
 				arene.incrementeCaractElement(defenseur, Caracteristique.FORCE, gainFo);
+				logs(Level.INFO, "\nCaca");
 			}
 			
 			// initiative
