@@ -93,7 +93,6 @@ public class StrategiePersonnage {
 					console.setPhrase("Je reste posey");
 				}			
 			}	
-			
 		} else {
 			int refCible = Calculs.chercheElementProche(position, voisins);
 			int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
