@@ -123,8 +123,6 @@ public class AreneJPanel extends JPanel {
 			message = null;
 			g.setFont(of);				
 		}
-		
-		/*	
 	  	Image image;
 		try {
 			image = ImageIO.read(new File("images/map.png"));	
@@ -135,7 +133,6 @@ public class AreneJPanel extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
 		// dessiner les elements
 		for(VuePotion vuePotion : potions) {
 			dessineElement(g, vuePotion);
@@ -207,21 +204,44 @@ public class AreneJPanel extends JPanel {
 				case "Voleur" :		iconePath = "images/Voleur.png";
 									break;
 			}
-			
 			iconeFile = new File(iconePath);
 			try {
 				icone = ImageIO.read(iconeFile);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-			g.drawImage(icone, coordX, coordY, null);
 		} 
 		else if (entite instanceof Potion)
 		{
-			// dessine la representation geometrique de l'element
-			dessineElementGeometrique(g, vueElement, coordX, coordY);
-		}			
+			switch (entite.getNom()) 
+			{
+			case "BonusForce" : 	iconePath = "images/Vie.png";
+								break;
+			case "BonusIni" :		iconePath = "images/Init.png";
+								break;
+			case "EtoileDeBowser" :	iconePath = "images/Vie.png";
+								break;
+			case "EtoileDeMario" :	iconePath = "images/Vie.png";
+								break;
+			case "MalusForce" :		iconePath = "images/Vie.png";
+								break;
+			case "MalusIni" :		iconePath = "images/Vie.png";
+								break;
+			case "PotDegats" :		iconePath = "images/Vie.png";
+								break;
+			case "PotHeal" :		iconePath = "images/Vie.png";
+								break;
+			case "Potion" :			iconePath = "images/Vie.png";
+			break;
+			}
+			iconeFile = new File(iconePath);
+			try {
+				icone = ImageIO.read(iconeFile);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}		
+		g.drawImage(icone, coordX, coordY, null);
 		
 
 		

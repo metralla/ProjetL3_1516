@@ -8,8 +8,13 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.InetAddress;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -20,22 +25,39 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+
+import client.StrategieAssassin;
+import client.StrategieBarde;
+import client.StrategieBerserker;
+import client.StrategieGuerrier;
+import client.StrategieIvrogne;
+import client.StrategieMageTemps;
+import client.StrategiePaladin;
+import client.StrategieVoleur;
 
 import interfacegraphique.interfacesimple.AreneJPanel;
 import interfacegraphique.interfacesimple.ElementsJPanel;
 import interfacegraphique.interfacesimple.FenetreClassement;
 import interfacegraphique.interfacesimple.FenetreDetail;
 import interfacegraphique.interfacesimple.components.VictoryScreen;
+import lanceur.ErreurLancement;
 import logger.LoggerProjet;
+import serveur.IArene;
 import serveur.IAreneIHM;
+import serveur.element.Caracteristique;
+import serveur.element.Potion;
 import serveur.vuelement.VueElement;
 import serveur.vuelement.VuePersonnage;
 import serveur.vuelement.VuePotion;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
+
+import interfacegraphique.interfacesimple.FenetreNouveauPersonnage;
+import interfacegraphique.interfacesimple.FenetreNouvellePotion;
 
 /**
  * Interface graphique.
@@ -93,7 +115,6 @@ public class IHM extends JFrame implements Runnable {
 	 */
 	protected VueElement<?> elementSelectionne;
 	
-	
 	/**
 	 * JLabel affichant le timer. 
 	 */
@@ -143,16 +164,53 @@ public class IHM extends JFrame implements Runnable {
 	public static Color grisClair = new Color(200, 200, 200);
 
 	/**
+	 * Fenetre Nouveau Personnage
+	 */
+	private FenetreNouveauPersonnage fenetrePersonnage;
+
+	/**
+	 * Fenetre Nouvelle potion.
+	 */
+	private FenetreNouvellePotion fenetrePotion;
+	
+	/**
 	 * Initialise l'IHM.
 	 * @param port port de communication avec l'arene
 	 * @param ipArene IP de communication avec l'arene
 	 * @param logger gestionnaire de log
 	 */
-	public IHM(int port, String ipArene, LoggerProjet logger) {
+	public IHM(int port, String ipArene, LoggerProjet logger) 
+	{
 		this.logger = logger;
 		this.port = port;
 		this.ipArene = ipArene;
 		initComposants();
+		
+		/**
+		 *  Ajout panneau création personnage et potion
+		 * 
+		 */
+		fenetrePersonnage = new FenetreNouveauPersonnage(this);
+		fenetrePotion = new FenetreNouvellePotion(this);
+
+		// ajout d'un listener de clic sur l'arene permettant l'envoi de personnage et de potion dynamiquement
+		arenePanel.addMouseListener
+		(
+			new MouseAdapter() 
+			{
+				public void mouseClicked(MouseEvent e) 
+				{
+					if (fenetrePersonnage != null && fenetrePersonnage.isVisible()) 
+					{
+						// affichage 
+					}
+					else if (fenetrePotion != null && fenetrePotion.isVisible())
+					{
+						// 
+					}
+				}
+			}
+		);
 	}
 
 	/**
@@ -247,14 +305,72 @@ public class IHM extends JFrame implements Runnable {
 				arenePanel.setAffichageJauge(cb.isSelected());
 			}
 		});
-
-
+		/**
+		 * Ajout Menu Personnage
+		 */
+		JMenu menuNouveauPersonnage = new JMenu("Personnage");
+		menuNouveauPersonnage.getAccessibleContext().setAccessibleDescription(
+				"Opération sur les personnages.");
+		JMenuItem nouveauPersonnage = new JMenuItem("New");
+		nouveauPersonnage.getAccessibleContext().setAccessibleDescription(
+				"Permet d'ajouter un personnage.");
+		nouveauPersonnage.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) { 
+				affichageFenetrePersonnage();
+			}			
+		});
+		/**
+		 * Ajout Menu Potion
+		 */
+		JMenu menuNouveauPotion = new JMenu("Potion");
+		menuNouveauPotion.getAccessibleContext().setAccessibleDescription(
+				"Opération sur les potions.");
+		JMenuItem nouvellePotion = new JMenuItem("New");
+		nouvellePotion.getAccessibleContext().setAccessibleDescription(
+				"Permet d'ajouter une potion.");
+		nouvellePotion.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) { 
+				affichageFenetrePotion();
+			}			
+		});
+		
 		affichageMenu.add(affichageJauge);
-		// affichageMenu.add(controleAction);
 		menuBar.add(affichageMenu);
+		menuNouveauPersonnage.add(nouveauPersonnage);
+		menuBar.add(menuNouveauPersonnage);
+		menuNouveauPotion.add(nouvellePotion);
+		menuBar.add(menuNouveauPotion);
 		setJMenuBar(menuBar);
 	}
 
+	
+	/**
+	 * Affiche la fenetre de creation de personnage.
+	 */
+	public void affichageFenetrePersonnage() 
+	{
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		Dimension screenSize = kit.getScreenSize();
+		int x = ((int) screenSize.getWidth() / 2 ) - (fenetrePersonnage.getWidth() / 2);
+		int y = ((int) screenSize.getHeight() / 2 ) - (fenetrePersonnage.getHeight() / 2);
+		Point point = new Point(x,y);
+		fenetrePersonnage.setLocation(point);
+		fenetrePersonnage.setVisible(true);	
+	}
+	/**
+	 * Affiche la fenetre de creation de potion.
+	 */
+	public void affichageFenetrePotion() 
+	{
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		Dimension screenSize = kit.getScreenSize();
+		int x = ((int) screenSize.getWidth() / 2 ) - (fenetrePotion.getWidth() / 2);
+		int y = ((int) screenSize.getHeight() / 2 ) - (fenetrePotion.getHeight() / 2);
+		Point point = new Point(x,y);
+		fenetrePotion.setLocation(point);
+		fenetrePotion.setVisible(true);	
+	}
+	
 	/**
 	 * Methode de rafraichissement appelee a tous les tours de jeu.
 	 */
@@ -428,6 +544,108 @@ public class IHM extends JFrame implements Runnable {
 		}
 	}
 
+	public void lancePersonnage(String type,Point position)
+	{
+		String groupe = "G10";
+		String nom = type;
+		
+		// creation du logger
+		LoggerProjet logger = null;
+		try 
+		{
+			logger = new LoggerProjet(true, "personnage_" + nom + groupe);
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+			System.exit(ErreurLancement.suivant);
+		}
+		// lancement du serveur
+		try
+		{
+			String ipConsole = InetAddress.getLocalHost().getHostAddress();
+			HashMap<Caracteristique, Integer> caracts = new HashMap<Caracteristique, Integer>();
+			int nbTours = Constantes.NB_TOURS_PERSONNAGE_DEFAUT;
+			logger.info("Lanceur", "Creation du personnage...");
+			switch(type)
+			{
+				case "Assassin":
+					new StrategieAssassin(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+				break;
+				case "Barde":
+					new StrategieBarde(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+					break;
+				case "Berserker":
+					new StrategieBerserker(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+				break;
+				case "Guerrier":
+					new StrategieGuerrier(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+				break;
+				case "Ivrogne":
+					new StrategieIvrogne(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+				break;
+				case "MageTemps":
+					new StrategieMageTemps(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+				break;
+				case "Paladin":
+					new StrategiePaladin(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+				break;
+				case "Voleur":
+					new StrategieVoleur(ipArene, port, ipConsole, nom, groupe, caracts, nbTours, position, logger);
+				break;
+			}
+			logger.info("Lanceur", "Creation du personnage reussie");	
+		}
+	catch (Exception e)
+	{
+		logger.severe("Lanceur", "Erreur lancement :\n" + e.getCause());
+		e.printStackTrace();
+		System.exit(ErreurLancement.suivant);
+		}
+	}
+	
+	public void lancePotion(String type,Point position)
+	{
+		String groupe = "G10";
+		String nom = type;
+		
+		// creation du logger
+		LoggerProjet logger = null;
+		try 
+		{
+			logger = new LoggerProjet(true, "potion_" + nom + groupe);
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+			System.exit(ErreurLancement.suivant);
+		}
+	// lancement de la potion
+		try 
+		{
+			IArene arene = (IArene) java.rmi.Naming.lookup(Constantes.nomRMI(ipArene, port, "Arene"));
+			logger.info("Lanceur", "Lancement de la potion sur le serveur...");
+			
+			// caracteristiques de la potion
+			HashMap<Caracteristique, Integer> caractsPotion = new HashMap<Caracteristique, Integer>();
+			
+			caractsPotion.put(Caracteristique.VIE, Calculs.valeurCaracAleatoirePosNeg(Caracteristique.VIE));
+			caractsPotion.put(Caracteristique.FORCE, Calculs.valeurCaracAleatoirePosNeg(Caracteristique.FORCE));
+			caractsPotion.put(Caracteristique.INITIATIVE, Calculs.valeurCaracAleatoirePosNeg(Caracteristique.INITIATIVE));
+			
+			// ajout de la potion
+			arene.ajoutePotion(new Potion(nom, groupe, caractsPotion),position);
+			logger.info("Lanceur", "Lancement de la potion reussi");
+			
+		} 
+		catch (Exception e) 
+		{
+			logger.severe("Lanceur", "Erreur lancement :\n" + e.getCause());
+			e.printStackTrace();
+			System.exit(ErreurLancement.suivant);
+		}
+	}
+	
 	private void finDePartie() {
 		try {
 			List<VuePersonnage> classement = arene.getClassement();
@@ -445,7 +663,7 @@ public class IHM extends JFrame implements Runnable {
 			erreurConnexion(e);
 		}
 	}
-
+	
 	/**
 	 * Lance l'actualisation automatique de l'IHM
 	 */
