@@ -86,9 +86,12 @@ public class StrategiePersonnage {
 				arene.lanceAutoSoin(refRMI);
 			}
 			else{
-				console.setPhrase("Wolf is comming");
-				
-				arene.deplace(refRMI, new Point(milieu,milieu));
+				if (position.x != milieu && position.y != milieu) {
+					console.setPhrase("Wolf is comming");
+					arene.deplace(refRMI, new Point(milieu,milieu));
+				} else {
+					console.setPhrase("Je reste posey");
+				}			
 			}	
 			
 		} else {
