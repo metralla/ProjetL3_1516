@@ -24,6 +24,7 @@ public class StrategiePersonnage {
 	 */
 	protected Console console;
 	private int checked = 0;
+	private int bloque = 0;
 	
 	protected StrategiePersonnage(LoggerProjet logger){
 		logger.info("Lanceur", "Creation de la console...");
@@ -73,8 +74,8 @@ public class StrategiePersonnage {
 		
 		// reference RMI de l'element courant
 		int refRMI = 0;
-
-		
+		int offset = Calculs.getOffset();
+		int milieu = (int)((Constantes.XMAX_ARENE - offset)/2);
 		// position de l'element courant
 		Point position = null;
 		
@@ -88,12 +89,13 @@ public class StrategiePersonnage {
 		
 		if (voisins.isEmpty()) { 
 			if((console.getPersonnage().getCaract(Caracteristique.VIE)<100)){
-			arene.lanceAutoSoin(refRMI);
+				arene.lanceAutoSoin(refRMI);
 			}
 			else{
-			console.setPhrase("J'erre...");
-			arene.deplace(refRMI, 0); 
-			}
+				console.setPhrase("Wolf is comming");
+				
+				arene.deplace(refRMI, new Point(milieu,milieu));
+			}	
 			
 		} else {
 			int refCible = Calculs.chercheElementProche(position, voisins);
@@ -156,6 +158,7 @@ public class StrategiePersonnage {
 					else{
 						if (distPlusProche == 4){
 							arene.lanceAutoSoin(refRMI);
+							bloque++;
 						} else if (distPlusProche < 4){		
 							console.setPhrase("Je vais vers mon voisin " + elemPlusProche);
 							arene.deplace(refRMI, refCible);
