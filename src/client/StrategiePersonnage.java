@@ -68,23 +68,32 @@ public class StrategiePersonnage {
 	public void executeStrategie(HashMap<Integer, Point> voisins) throws RemoteException {
 		// arene
 		IArene arene = console.getArene();
+		HashMap<Caracteristique,Integer> cv =new HashMap<Caracteristique, Integer>();
+		int checked=0;
 		
 		// reference RMI de l'element courant
 		int refRMI = 0;
+		int initmstr=0;
 		
 		// position de l'element courant
 		Point position = null;
 		
 		try {
+			
 			refRMI = console.getRefRMI();
 			position = arene.getPosition(refRMI);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 		
-		if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
+		if (voisins.isEmpty()) { 
+			if((console.getPersonnage().getCaract(Caracteristique.VIE)<100)){
+			arene.lanceAutoSoin(refRMI);
+			}
+			else{
 			console.setPhrase("J'erre...");
 			arene.deplace(refRMI, 0); 
+			}
 			
 		} else {
 			int refCible = Calculs.chercheElementProche(position, voisins);
@@ -95,25 +104,91 @@ public class StrategiePersonnage {
 			if(distPlusProche <= Constantes.DISTANCE_MIN_INTERACTION) { // si suffisamment proches
 				// j'interagis directement
 				if(arene.estPotionFromRef(refCible)){ // potion
-					// ramassage
-					console.setPhrase("Je ramasse une potion");
-
-					arene.ramassePotion(refRMI, refCible);			
-				} else { // personnage
+					int effpoponear= arene.caractFromRef(refCible, Caracteristique.VIE)+arene.caractFromRef(refCible, Caracteristique.FORCE)+arene.caractFromRef(refCible, Caracteristique.INITIATIVE)+arene.caractFromRef(refCible, Caracteristique.DEFENSE);
+					if((effpoponear>0)&&((console.getPersonnage().getCaract(Caracteristique.VIE)-arene.caractFromRef(refCible,Caracteristique.VIE))>30)){
+					console.setPhrase("Je ramasse une potion sympathique");
+					arene.ramassePotion(refRMI, refCible);		
+					}
+							
+				} else if (arene.estPersonnageFromRef(refCible)){ // personnage
 					// duel
 					console.setPhrase("Je fais un duel avec " + elemPlusProche);
+					if(arene.estMonstreFromRef(refRMI)){
+						initmstr=0;
+					}
 					arene.lanceAttaque(refRMI, refCible);
 					arene.deplace(refRMI, refCible);
+					if(arene.caractFromRef(refCible, Caracteristique.VIE)<=0){
+						checked=0;
+					}
+					else{ //Potion negative qui est apparue directement en face -> d�placement al�atoire
+						arene.lanceAttaque(refRMI, refCible);
+						arene.deplace(refRMI, 0);
+					}
+					
 				}
 				
-			} else { // si voisins, mais plus eloignes
+			} else { 
+				
+				if(arene.estPotionFromRef(refCible)){
+					
+					int effpopo= arene.caractFromRef(refCible, Caracteristique.VIE)+arene.caractFromRef(refCible, Caracteristique.FORCE)+arene.caractFromRef(refCible, Caracteristique.INITIATIVE)+arene.caractFromRef(refCible, Caracteristique.DEFENSE);
+					if((effpopo>0)&&((console.getPersonnage().getCaract(Caracteristique.VIE)-arene.caractFromRef(refCible,Caracteristique.VIE))>30)){
+						console.setPhrase("Je vais vers cette gouleyante potion " + elemPlusProche);
+						arene.deplace(refRMI, refCible);	
+					}
+				}
+				if(arene.estMonstreFromRef(refCible)){
+					if (initmstr==0){
+						cv=arene.lanceClairvoyance(refRMI, refCible);
+						initmstr= cv.get(Caracteristique.INITIATIVE);
+					}
+					else if (initmstr<console.getPersonnage().getCaract(Caracteristique.INITIATIVE)){
+						
+						if (distPlusProche==4){
+							arene.lanceAttaque(refRMI, refCible);
+						}
+						else { arene.deplace(refRMI, refCible);
+						arene.lanceAttaque(refRMI, refCible);
+						}
+					}
+					else{
+						arene.deplace(refRMI,0);
+						arene.lanceAttaque(refRMI, 0);
+					}
+					
+				}
+				else{
+					if (checked==0){
+						cv=arene.lanceClairvoyance(refRMI, refCible);
+						checked=1;
+					}
+					else{
+						if (distPlusProche==4){
+							arene.lanceAttaque(refRMI, refCible);
+						}
+						else{		
+						if((console.getPersonnage().getCaract(Caracteristique.INITIATIVE)> cv.get(Caracteristique.INITIATIVE))&&(cv.get(Caracteristique.VIE)-console.getPersonnage().getCaract(Caracteristique.FORCE)*cv.get(Caracteristique.DEFENSE)/100<=0)){
+						arene.deplace(refRMI, refCible);
+						arene.lanceAttaque(refRMI, refCible);
+						}
+						
+					    else{
+						checked=0;
+						arene.deplace(refRMI, 0);
+						arene.lanceAttaque(refRMI, 0);	
+					    }
+					}
+					
+				}
+				// si voisins, mais plus eloignes
 				// je vais vers le plus proche
 				console.setPhrase("Je vais vers mon voisin " + elemPlusProche);
 				arene.deplace(refRMI, refCible);
 				arene.lanceAttaque(refRMI, refCible);
 			}
 		}
-	}
+	}	}
 
 	
 }
