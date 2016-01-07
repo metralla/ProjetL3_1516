@@ -79,10 +79,11 @@ public class StrategieAssassin extends StrategiePersonnage {
 		}
 		
 		if (voisins.isEmpty()) { // je n'ai pas de voisins, j'erre
-			console.setPhrase("J'erre...");
+			console.setPhrase("J'erre like a ninja");
 			arene.deplace(refRMI, 0); 
-			
-		} else {
+			console.setPhrase(console.getPersonnage().getNom());
+		} 
+		else {
 			int refCible = Calculs.chercheElementProche(position, voisins);
 			int distPlusProche = Calculs.distanceChebyshev(position, arene.getPosition(refCible));
 

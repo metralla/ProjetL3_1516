@@ -654,10 +654,54 @@ public class IHM extends JFrame implements Runnable {
 			
 			// caracteristiques de la potion
 			HashMap<Caracteristique, Integer> caractsPotion = new HashMap<Caracteristique, Integer>();
-			
-			caractsPotion.put(Caracteristique.VIE, Calculs.valeurCaracAleatoirePosNeg(Caracteristique.VIE));
-			caractsPotion.put(Caracteristique.FORCE, Calculs.valeurCaracAleatoirePosNeg(Caracteristique.FORCE));
-			caractsPotion.put(Caracteristique.INITIATIVE, Calculs.valeurCaracAleatoirePosNeg(Caracteristique.INITIATIVE));
+			switch(type)
+			{
+			case "BonusForce":
+				caractsPotion.put(Caracteristique.VIE,0);
+				caractsPotion.put(Caracteristique.FORCE,10);
+				caractsPotion.put(Caracteristique.INITIATIVE,0);
+				break;
+			case "BonusIni":
+				caractsPotion.put(Caracteristique.VIE,0);
+				caractsPotion.put(Caracteristique.FORCE,0);
+				caractsPotion.put(Caracteristique.INITIATIVE,10);
+				break;
+			case "EtoileDeBowser":
+				caractsPotion.put(Caracteristique.VIE,-20);
+				caractsPotion.put(Caracteristique.FORCE,-20);
+				caractsPotion.put(Caracteristique.INITIATIVE,-20);
+				break;
+			case "EtoileDeMario":
+				caractsPotion.put(Caracteristique.VIE,20);
+				caractsPotion.put(Caracteristique.FORCE,20);
+				caractsPotion.put(Caracteristique.INITIATIVE,20);
+				break;
+			case "MalusForce":
+				caractsPotion.put(Caracteristique.VIE,0);
+				caractsPotion.put(Caracteristique.FORCE,-10);
+				caractsPotion.put(Caracteristique.INITIATIVE,0);
+				break;
+			case "MalusIni":
+				caractsPotion.put(Caracteristique.VIE,0);
+				caractsPotion.put(Caracteristique.FORCE,0);
+				caractsPotion.put(Caracteristique.INITIATIVE,-10);
+				break;
+			case "PotDegats":
+				caractsPotion.put(Caracteristique.VIE,-10);
+				caractsPotion.put(Caracteristique.FORCE,0);
+				caractsPotion.put(Caracteristique.INITIATIVE,0);
+				break;
+			case "PotHeal":
+				caractsPotion.put(Caracteristique.VIE,10);
+				caractsPotion.put(Caracteristique.FORCE,0);
+				caractsPotion.put(Caracteristique.INITIATIVE,0);
+				break;
+			case "Potion":
+				caractsPotion.put(Caracteristique.VIE, Calculs.valeurCaracAleatoirePosNeg(Caracteristique.VIE));
+				caractsPotion.put(Caracteristique.FORCE, Calculs.valeurCaracAleatoirePosNeg(Caracteristique.FORCE));
+				caractsPotion.put(Caracteristique.INITIATIVE, Calculs.valeurCaracAleatoirePosNeg(Caracteristique.INITIATIVE));
+				break;
+			}
 			
 			// ajout de la potion
 			arene.ajoutePotion(new Potion(nom, groupe, caractsPotion),position);
