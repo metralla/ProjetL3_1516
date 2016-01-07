@@ -130,7 +130,6 @@ public class AreneJPanel extends JPanel {
 			g.drawImage(image, 0, 0, (int)rect.getWidth(),(int)rect.getHeight(),
 					0, 0, image.getWidth(null),image.getHeight(null),null);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// dessiner les elements
@@ -262,7 +261,8 @@ public class AreneJPanel extends JPanel {
 	 * @param coordX abscisse de l'element
 	 * @param coordY ordonnee de l'element
 	 */
-	private void dessineElementGeometrique(Graphics g, VueElement<?> vueElement, int coordX, int coordY) {
+/*	
+   private void dessineElementGeometrique(Graphics g, VueElement<?> vueElement, int coordX, int coordY) {
 		if (vueElement.isSelectionne()) {
 			g.setColor(SELECTED_COLOR);
 			g.fillOval(coordX - 5, coordY - 5, ELEMENT_SIZE + 10, ELEMENT_SIZE + 10);
@@ -277,7 +277,7 @@ public class AreneJPanel extends JPanel {
 			g.fillPolygon(p);
 		}
 	}
-
+*/
 	/**
 	 * Ecrit le nom de l'element.
 	 * @param g graphics
@@ -388,7 +388,9 @@ public class AreneJPanel extends JPanel {
 	 * @param base taille de la base du triangle
 	 * @return polygone correspondant a un triangle
 	 */
-	private Polygon creeTriangle(int coordX, int coordY, int base) {
+/*
+ 	private Polygon creeTriangle(int coordX, int coordY, int base) {
+
 		Polygon p = new Polygon();
 		int hauteur = (int) (1.2 * base);
 		
@@ -398,7 +400,7 @@ public class AreneJPanel extends JPanel {
 		
 		return p;
 	}
-
+*/
 	/**
 	 * Definit le message a afficher.
 	 * @param msg message a afficher
