@@ -155,6 +155,32 @@ public class StrategiePersonnage {
 					}
 					else{
 						if (distPlusProche == 4){
+							
+							int choix= utilitaires.Calculs.nombreAleatoire(1, 10);
+							switch(choix)
+							{
+							case 1: console.setPhrase("To be Or not to be ?");
+							break;
+							case 2: console.setPhrase("Allez PARIS !!!!");
+							break;
+							case 3: console.setPhrase("Mais elle est ou ma caisse :(");
+							break;
+							case 4: console.setPhrase("Aux champs hips...lysé");
+							break;
+							case 5: console.setPhrase("J'ai mal à la tête");
+							break;
+							case 6: console.setPhrase("Say my name !");
+							break;
+							case 7: console.setPhrase("I'll be back");
+							break;
+							case 8: console.setPhrase("TERMINAAAAAATE");
+							break;
+							case 9: console.setPhrase("Zumbaaaaa je danseeeeeee la zumba");
+							break;
+							case 10: console.setPhrase("Je suis une PATATE");
+							break;
+							}
+							
 							arene.lanceAutoSoin(refRMI);
 						} else if (distPlusProche < 4){		
 							console.setPhrase("Je vais vers mon voisin " + elemPlusProche);
