@@ -22,7 +22,7 @@ import utilitaires.Constantes;
  */
 public class StrategieIsidore extends StrategiePersonnage{
 	
-	
+		protected Console console;
 		
 		public StrategieIsidore(String ipArene, int port, String ipConsole, 
 				String nom, String groupe, HashMap<Caracteristique, Integer> caracts,
@@ -106,7 +106,7 @@ public class StrategieIsidore extends StrategiePersonnage{
 						if(arene.caractFromRef(refCible, Caracteristique.VIE)<=0){
 							checked=0;
 						}
-						else{ //Potion negative qui est apparue directement en face -> déplacement aléatoire
+						else{ //Potion negative qui est apparue directement en face -> dï¿½placement alï¿½atoire
 							arene.lanceAttaque(refRMI, refCible);
 							arene.deplace(refRMI, 0);
 						}
