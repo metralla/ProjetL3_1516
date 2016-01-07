@@ -99,7 +99,6 @@ public class StrategieBerserker extends StrategiePersonnage {
 				} else { // personnage
 					// duel
 					console.setPhrase("Je fais un duel avec " + elemPlusProche.getNom());
-					gainFo();
 					arene.lanceAttaque(refRMI, refCible);
 				}
 				
@@ -111,12 +110,6 @@ public class StrategieBerserker extends StrategiePersonnage {
 		}
 	}
 
-	public void gainFo() throws RemoteException {
-		if(console.getPersonnage().getCaract(Caracteristique.VIE) < 100) {
-			int gain = (100 - console.getPersonnage().getCaract(Caracteristique.VIE)) / 2;
-			console.getPersonnage().incrementeCaract(Caracteristique.FORCE, gain);
-		}
-	}
 	
 }
 

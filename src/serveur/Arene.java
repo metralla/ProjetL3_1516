@@ -17,6 +17,7 @@ import java.util.logging.Level;
 
 import client.controle.IConsole;
 import logger.LoggerProjet;
+import serveur.element.Berserker;
 import serveur.element.Caracteristique;
 import serveur.element.Element;
 import serveur.element.Personnage;
@@ -730,6 +731,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 		return res;
 	}
 	
+	
 	@Override
 	public boolean lanceAttaque(int refRMI, int refRMIAdv) throws RemoteException {
 		boolean res = false;
@@ -766,6 +768,7 @@ public class Arene extends UnicastRemoteObject implements IAreneIHM, Runnable {
 			
 					new Duel(this, client, clientAdv).interagit();
 					personnages.get(refRMI).executeAction();
+				
 					
 					// si l'adversaire est mort
 					if (!persAdv.estVivant()) {

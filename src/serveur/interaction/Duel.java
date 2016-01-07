@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 
 import serveur.Arene;
+import serveur.element.Berserker;
 import serveur.element.Caracteristique;
 import serveur.element.Personnage;
 import serveur.vuelement.VuePersonnage;
@@ -45,6 +46,11 @@ public class Duel extends Interaction<VuePersonnage> {
 				
 				logs(Level.INFO, Constantes.nomRaccourciClient(attaquant) + " colle une beigne ("
 						+ perteVie + " points de degats) a " + Constantes.nomRaccourciClient(defenseur));
+			}
+			
+			if(defenseur.getElement() instanceof Berserker) {
+				int gainFo = 100 - defenseur.getElement().getCaract(Caracteristique.VIE);
+				arene.incrementeCaractElement(defenseur, Caracteristique.FORCE, gainFo);
 			}
 			
 			// initiative
