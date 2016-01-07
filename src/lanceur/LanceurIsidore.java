@@ -9,14 +9,13 @@ import java.net.InetAddress;
 import java.util.HashMap;
 
 import client.StrategieIsidore;
-import client.StrategiePersonnage;
 import logger.LoggerProjet;
 import serveur.element.Caracteristique;
 import utilitaires.Calculs;
 import utilitaires.Constantes;
 
 /**
- * @author Théo
+ * @author Theo
  *
  */
 public class LanceurIsidore {
