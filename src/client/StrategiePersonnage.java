@@ -86,12 +86,13 @@ public class StrategiePersonnage {
 				arene.lanceAutoSoin(refRMI);
 			}
 			else{
-				if (position.x != milieu || position.y != milieu) {
+				/*if (position.x != milieu || position.y != milieu) {
 					console.setPhrase("Wolf is comming");
 					arene.deplace(refRMI, new Point(milieu,milieu));
 				} else {
 					console.setPhrase("Je reste posey");
-				}			
+				}	*/
+				arene.deplace(refRMI, 0);
 			}	
 		} else {
 			int refCible = Calculs.chercheElementProche(position, voisins);
@@ -162,7 +163,7 @@ public class StrategiePersonnage {
 							break;
 							case 3: console.setPhrase("Mais elle est ou ma caisse :(");
 							break;
-							case 4: console.setPhrase("Isidore de Casse, enchanté");
+							case 4: console.setPhrase("Isidore du Casse, enchanté");
 							break;
 							case 5: console.setPhrase("I'll kill you");
 							break;
@@ -179,10 +180,46 @@ public class StrategiePersonnage {
 							}
 							
 							arene.lanceAutoSoin(refRMI);
+							arene.deplace(refCible, refRMI);
 						} else if (distPlusProche < 4){		
 							console.setPhrase("Je vais vers mon voisin " + elemPlusProche);
 							arene.deplace(refRMI, refCible);
 							arene.lanceAttaque(refRMI, refCible);
+							
+							int choix= utilitaires.Calculs.nombreAleatoire(1, 10);
+							switch(choix)
+							{
+							case 1: arene.setPhrase(refCible, "Je suis soumis à Isidore");
+									console.setPhrase("Viens têter ma lame");
+							break;
+							case 2: console.setPhrase("Priez pour moi");
+									arene.setPhrase(refCible, "Gloire à Isidore !");
+							break;
+							case 3: console.setPhrase("Apportez moi une chèvre !");
+									arene.setPhrase(refCible, "Voici mon sacrifice à Isidore");	
+							break;
+							case 4: arene.setPhrase(refCible, "Je vous aime Isidore");
+									console.setPhrase("Aboule la thune et casse toi");	
+							break;
+							case 5: arene.setPhrase(refCible, "Prends moi grand fou");
+									console.setPhrase("J'ai pas faim à ce point là");
+							break;
+							case 6: arene.setPhrase(refCible, "Je suis ton disciple, Isidore");
+									console.setPhrase("Bienvenue dans mon donjon");
+							break;
+							case 7: console.setPhrase("Viens jouer mon délicieux enfant");
+									arene.setPhrase(refCible, "Oui monsieur");
+							break;
+							case 8: arene.setPhrase(refCible, "Je m'agenouille devant vous Isidore");
+									console.setPhrase("Penche toi et tousse");
+							break;
+							case 9: arene.setPhrase(refCible, "All hail Isidore");
+									console.setPhrase("Nein nein nein nein nein nein");
+							break;
+							case 10: arene.setPhrase(refCible, "Oh Isidore, vos attributs sont bien forts");
+									console.setPhrase("C'est ce qu'elles disent toutes");
+							break;
+							}
 						} else {
 							console.setPhrase("Je vais vers mon voisin " + elemPlusProche);
 							arene.deplace(refRMI, refCible);
