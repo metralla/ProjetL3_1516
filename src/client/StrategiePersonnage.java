@@ -103,7 +103,7 @@ public class StrategiePersonnage {
 				// j'interagis directement
 				if(arene.estPotionFromRef(refCible)){ // potion
 					int effpoponear= arene.caractFromRef(refCible, Caracteristique.VIE)+arene.caractFromRef(refCible, Caracteristique.FORCE)+arene.caractFromRef(refCible, Caracteristique.DEFENSE);
-					if((effpoponear>0)&&((console.getPersonnage().getCaract(Caracteristique.VIE)-arene.caractFromRef(refCible,Caracteristique.VIE))>20)){
+					if((effpoponear>0)&&((console.getPersonnage().getCaract(Caracteristique.VIE)+arene.caractFromRef(refCible,Caracteristique.VIE))>20)){
 						console.setPhrase("Je ramasse une potion sympathique");
 						arene.ramassePotion(refRMI, refCible);		
 					} else {
@@ -128,7 +128,7 @@ public class StrategiePersonnage {
 				if(arene.estPotionFromRef(refCible)){
 					
 					int effpopo= arene.caractFromRef(refCible, Caracteristique.VIE)+arene.caractFromRef(refCible, Caracteristique.FORCE)+arene.caractFromRef(refCible, Caracteristique.DEFENSE);
-					if((effpopo>0)&&((console.getPersonnage().getCaract(Caracteristique.VIE)-arene.caractFromRef(refCible,Caracteristique.VIE))>20)){
+					if((effpopo>0)&&((console.getPersonnage().getCaract(Caracteristique.VIE)+arene.caractFromRef(refCible,Caracteristique.VIE))>20)){
 						console.setPhrase("Je vais vers cette gouleyante potion " + elemPlusProche);
 						arene.deplace(refRMI, refCible);	
 					} else {
