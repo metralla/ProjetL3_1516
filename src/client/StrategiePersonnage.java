@@ -86,7 +86,7 @@ public class StrategiePersonnage {
 				arene.lanceAutoSoin(refRMI);
 			}
 			else{
-				if (position.x != milieu && position.y != milieu) {
+				if (position.x != milieu || position.y != milieu) {
 					console.setPhrase("Wolf is comming");
 					arene.deplace(refRMI, new Point(milieu,milieu));
 				} else {
@@ -162,9 +162,9 @@ public class StrategiePersonnage {
 							break;
 							case 3: console.setPhrase("Mais elle est ou ma caisse :(");
 							break;
-							case 4: console.setPhrase("Aux champs hips...lys�");
+							case 4: console.setPhrase("Isidore de Casse, enchanté");
 							break;
-							case 5: console.setPhrase("J'ai mal � la t�te");
+							case 5: console.setPhrase("I'll kill you");
 							break;
 							case 6: console.setPhrase("Say my name !");
 							break;
